@@ -1,0 +1,47 @@
+{
+  "name": "vivint-bowling",
+  "version": "0.0.1",
+  "description": "A bowling application for Vivint's interview",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node_modules/babel-cli/bin/babel.js ./ --source-maps --out-dir dist",
+    "server": "cross-env NODE_ENV=development nodemon node_modules/nodemon/bin/nodemon.js -- node_modules/babel-cli/bin/babel-node.js server/server.js",
+    "client": "cd client && npm start",
+    "populate": "npx babel-node tests/populate.js",
+    "delete": "npx babel-node tests/delete.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "vivint-bowling"
+  },
+  "author": "SangHee Kim",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^2.6.0",
+    "axios": "^0.17.1",
+    "babel-core": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-node6": "^11.0.0",
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "moment": "^2.19.2",
+    "mongoose": "^4.13.4",
+    "morgan": "^1.9.0",
+    "react-scripts": "1.0.17"
+  },
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.5.0",
+    "babel-preset-react-optimize": "^1.0.1",
+    "babel-preset-stage-0": "^6.24.1",
+    "cross-env": "^5.1.1",
+    "eslint": "^2.11.1",
+    "eslint-plugin-react": "^5.1.1",
+    "nodemon": "^1.12.1",
+    "webpack": "^3.9.1"
+  }
+}
