@@ -1,18 +1,11 @@
 import mongoose, {Schema} from 'mongoose';
 
 var gameSchema = new Schema({
-	player: {
-    type: Schema.Types.ObjectId,
-    ref: 'Player',
-    required: true,
-  },
-
-	frames:{
+  frames:{
     type: [{
-      type: Schema.Types.ObjectId,
+      type: Schema.Types.Mixed,
       required: true,
     }],
-    validate:[frameLimit, 'The number of frames do not match the required 10.']
   },
 
   totalScore: Number,

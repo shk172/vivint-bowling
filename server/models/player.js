@@ -7,17 +7,10 @@ var playerSchema = new Schema({
     unique: true
   },
 
-  frames: {
-    type: [{
-      type: Schema.Types.ObjectId,
-      ref: 'Frame'
-    }],
-    validate: [frameLimit, 'The number of frames does not match the required 10']
-  }
+  games: [{
+    type: Schema.Types.Mixed,
+    ref: 'Game'
+  }],
 })
-
-function frameLimit(array){
-  return array.length === 10;
-}
 
 export default mongoose.model('Player', playerSchema);

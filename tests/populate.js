@@ -1,52 +1,43 @@
-import mongoose from 'mongoose';
-import Content from '../server/models/content';
-import User from '../server/models/user';
+import axios from 'axios';
 
 function populate(){
-	mongoose.connect('mongodb://localhost:27017');
-	for(let i = 0; i < 50; i++){
-		var testContent = {
-			title: `test${i}`,
-
-			genre: 'Literature',
-
-			numSubscribers: 3,
-
-			creator: 'SangHee',
+	var testFrames = [];
+	for(let i = 1; i <= 10; i++){
+		var testFrame = {
+			frameNumber: i,
+			rollNumber: 1,
+			frameFinished: false,
+			strike: false,
+			spare: false,
+			firstRoll: "",
+			firstRollValue: 0,
+			secondRoll: "",
+			secondRollValue: 0,
 		}
-		var newContent = new Content(testContent);
-		newContent.save();
+		testFrames.push(newFrame);
+	}
+	var testGame = {
+		frames: testFrames,
+		totalScore: 0,
+		currentFrame: 1,
+		gameOver: false,
 	}
 
-	console.log("100 test contents have been added");
-	var SangHee = {
-		firstName: 'SangHee',
-		lastName: 'Kim',
-		userName: 'shk',
-		password: 'shk'
+	var testPlayer = {
+		playerName: "SangHee",
+		games: [testGame]
 	}
-	var newUser = new User(SangHee);
-	newUser.save();
 
-	var AliKhan = {
-		firstName: 'Ali',
-		lastName: 'Khan',
-		userName: 'ak',
-		password: 'ak'
-	}
-	var newUser = new User(AliKhan);
-	newUser.save();
+	const url = "http://localhost:8000/v1/players"
 
-	var AliA = {
-		firstName: 'Ali',
-		lastName: 'A',
-		userName: 'aa',
-		password: 'aa'
-	}
-	var newUser = new User(AliA);
-	newUser.save();
-
-	mongoose.disconnect();
+	axios.post(url, testPlayer)
+	.then(function(response){
+		console.log(response);
+	})
+	.catch(function(error){
+		console.log("Error with post command");
+		//console.log(error);
+	})
 }
 
 export default populate();

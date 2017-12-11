@@ -1,11 +1,15 @@
-import mongoose from 'mongoose';
-import Content from '../server/models/content';
-import User from '../server/models/user';
-mongoose.connect('mongodb://localhost:27017');
-Content.remove({}, function(err){
-	console.log("All content entries have been removed");
-	User.remove({}, function(err){
-		console.log("All user entries have been removed");
-		mongoose.disconnect();
-	})
-});
+import axios from 'axios';
+function deleteTest(){
+	const url = "http://localhost:8000/v1/players";
+	axios.delete(url,	{})
+		.then(function(res){
+			console.log("Deleted Successfully");
+		})
+		.catch(function(error){
+			console.log(error);
+			console.log("Error with delete command")
+		});	
+}
+
+export default deleteTest();
+
