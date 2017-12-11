@@ -1,29 +1,52 @@
 import React, { Component } from 'react';
+import axios from 'axios';
 import './App.css';
 import Game from './components/Game'
+
+const url = 'http://localhost:8000/v1/players';
 
 class App extends Component {
   constructor(props){
     super(props);
     this.state={
-      players: {},
+      players: [],
       nameValue: "",
     }
   }
 
   componentDidMount(){
-
+    axios.get(url)
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(error){
+        console.log(error);
+      })
   }
 
   _addPlayer(){
+    if(this.state.nameValue.length === 0){
+      alert("Please type a value for the name.")
+      return;
+    }
     var players = this.state.players;
-    players[this.state.nameValue] = {
+    var player = {
       name: this.state.nameValue,
-      scores: []
+      games: []
     };
+    players.push(player);
     this.setState({
       players,
       nameValue: "",
+    }, function(){
+      axios.post(url, player)
+      .then(function(response){
+        console.log(response);
+      })
+      .catch(function(error){
+        console.log('Error with POST command');
+        console.log(error);
+      })
     });
   }
 
@@ -36,9 +59,9 @@ class App extends Component {
 
 
   render() {
-    var playerScores = Object.keys(this.state.players).map((playerName)=>{
+    var playerScores = this.state.players.map((player)=>{
       return(
-        <Game key={playerName} player={this.state.players[playerName]}/>
+        <Game key={player.name} player={player}/>
       )
     })
 

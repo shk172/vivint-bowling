@@ -1,7 +1,7 @@
 import mongoose, {Schema} from 'mongoose';
 
 var playerSchema = new Schema({
-  playerName: {
+  name: {
     type: String,
     required: true,
     unique: true

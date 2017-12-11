@@ -14,7 +14,7 @@ function populate(){
 			secondRoll: "",
 			secondRollValue: 0,
 		}
-		testFrames.push(newFrame);
+		testFrames.push(testFrame);
 	}
 	var testGame = {
 		frames: testFrames,
@@ -24,7 +24,7 @@ function populate(){
 	}
 
 	var testPlayer = {
-		playerName: "SangHee",
+		name: "SangHee",
 		games: [testGame]
 	}
 
