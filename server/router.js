@@ -1,36 +1,19 @@
 import express, { Router } from 'express';
-import { contentGet, contentGetWithId, contentPost, contentPut, contentDelete, contentDeleteWithId } from './controllers/contentController';
-import { userGet, userGetWithId, userPost, userPut, userDelete, userDeleteWithId } from './controllers/userController';
-import content from './models/content';
-import User from './models/user';
+import { playerGet, playerGetWithId, playerPost, playerPut, playerDelete, playerDeleteWithId } from './controllers/playerController';
+import Player from './models/player';
 
 const router = Router();
 
-router.route('/contents')
-	.get(contentGet);
+router.route('/players')
+	.get(playerGet);
 
-router.route('/users')
-	.get(userGet);
+///players
+router.get('/players/:id', playerGetWithId);
 
-///contents
-router.get('/contents/:id', contentGetWithId);
+router.post('/players', playerPost);
 
-router.post('/contents', contentPost);
+router.delete('/players', playerDelete);
 
-router.put('/contents:id', contentPut);
-
-router.delete('/contents', contentDelete);
-
-router.delete('/contents/:id', contentDeleteWithId);
-
-
-///Users
-router.get('/users/:id', userGetWithId);
-
-router.post('/users', userPost);
-
-router.delete('/users', userDelete);
-
-router.delete('/users/:id', userDeleteWithId);
+router.delete('/players/:id', playerDeleteWithId);
 
 export default router;

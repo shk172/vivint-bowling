@@ -4,7 +4,6 @@ import morgan from 'morgan';
 
 import config from './config';
 import router from './router';
-import Content from './models/content';
 import bodyParser from 'body-parser';
 //import populate from '../tests/populate';
 
@@ -20,11 +19,7 @@ mongoose.connect(config.mongoURL, (error)=>{
 const app = express();
 
 app.get('/', (req, res)=>{
-	res.send("Hello World!");
-})
-
-app.get('/index', (req, res)=>{
-	res.send("Index");
+	res.send("Hello, this is the server for the bowling app");
 })
 
 app.use(morgan('combined'));

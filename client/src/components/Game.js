@@ -216,8 +216,8 @@ class Game extends Component {
           <option>9</option>
         </select>
         <button onClick={this._addScore}>Add Score</button>
-        <button onClick={this._handleStrike}>Strike</button>
         <button onClick={this._handleSpare}>Spare</button>
+        <button onClick={this._handleStrike}>Strike</button>
         <button onClick={this._resetScore}>Reset Score</button>
       </div>
     )
