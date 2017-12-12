@@ -82,7 +82,6 @@ class Game extends Component {
 
   _calculateTotal(frames, currentFrame){
     var totalScore = 0;
-    console.log(currentFrame);
     for(var i = 1; i <= currentFrame; i++){
       totalScore += frames[i].getTotalScore();
       if(i < currentFrame && frames[i].isStrike()){
@@ -171,22 +170,36 @@ class Game extends Component {
 
   //Resets all scores from the scoreboard
   _resetScore(){
+    var frames = {
+      1: new Frame(1),
+      2: new Frame(2),
+      3: new Frame(3),
+      4: new Frame(4),
+      5: new Frame(5),
+      6: new Frame(6),
+      7: new Frame(7),
+      8: new Frame(8),
+      9: new Frame(9),
+      10: new Frame(10),
+    };
+    var gameOver = false;
+    var currentFrame = 1;
+    var totalScore = 0;
     this.setState({
-      gameOver: false,
-      currentFrame: 1,
-      totalScore: 0,
-      frames: {
-        1: new Frame(1),
-        2: new Frame(2),
-        3: new Frame(3),
-        4: new Frame(4),
-        5: new Frame(5),
-        6: new Frame(6),
-        7: new Frame(7),
-        8: new Frame(8),
-        9: new Frame(9),
-        10: new Frame(10),
-      },
+      gameOver: gameOver,
+      currentFrame: currentFrame,
+      totalScore: totalScore,
+      frames: frames,
+    }, function(){
+      axios.patch(this.state.url, {
+        _id: this.state.id,
+        name: this.state.name,
+        game:{
+          frames,
+          currentFrame,
+          totalScore,
+        }
+      })
     })
   }
 

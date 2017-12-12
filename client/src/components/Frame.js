@@ -1,17 +1,17 @@
-function Frame(frameNumber){
+function Frame(frameNumber, firstRoll, firstRollValue, secondRoll, secondRollValue, spare, strike, frameFinished, rollNumber){
   this.frameNumber = frameNumber;
-  this.rollNumber = 1;
-  this.frameFinished = false;
+  this.rollNumber = typeof rollNumber !== 'undefined' ? rollNumber : 1;
+  this.frameFinished = typeof frameFinished !== 'undefined' ? frameFinished : false;
 
-  this.strike = false;
-  this.spare = false;
+  this.strike = typeof strike !== 'undefined' ? strike : false;
+  this.spare = typeof spare !== 'undefined' ? spare : false;
 
-  this.firstRoll = null;
-  this.secondRoll = null;
+  this.firstRoll = typeof firstRoll !== 'undefined' ? firstRoll : null;
+  this.secondRoll = typeof secondRoll !== 'undefined' ? secondRoll : null;
 
   //These two variables will be used in case of Strike and Spare, to replace X and /.
-  this.firstRollValue = 0;
-  this.secondRollValue = 0;
+  this.firstRollValue = typeof firstRollValue !== 'undefined' ? firstRollValue : 0;
+  this.secondRollValue = typeof secondRollValue !== 'undefined' ? secondRollValue : 0;
 
   this.getTotalScore = function(){
     return this.firstRollValue + this.secondRollValue;
