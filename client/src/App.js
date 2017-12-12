@@ -3,6 +3,7 @@ import axios from 'axios';
 import './App.css';
 import Game from './components/Game';
 import Frame from './components/Frame';
+import logo from './vivint-logo.png';
 
 const url = 'http://localhost:8000/v1/players';
 
@@ -98,13 +99,26 @@ class App extends Component {
 
     return (
       <div className="App">
-        {playerScores}
-        <input
-          type='text'
-          value={this.state.nameValue}
-          onChange={this._updateNameValue.bind(this)}
-        />
-        <button onClick={this._addPlayer.bind(this)}>Add a player</button>
+        <div className="Header">
+          <img
+            src={logo}
+            alt="logo"
+            style={{float: "left", margin: "5px"}}/>
+          </div>
+        <div className="Body">
+          <div className="SideBar">
+            <input
+              type='text'
+              style={{float: "right", height: '18px'}}
+              value={this.state.nameValue}
+              onChange={this._updateNameValue.bind(this)}
+            />
+            <button style={{float: "right", height: '24px'}} onClick={this._addPlayer.bind(this)}>Add a player</button>
+          </div>
+          <div className="Scores">
+            {playerScores}
+          </div>
+        </div>
       </div>
     );
   }

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Frame from './Frame'
 import axios from 'axios';
+import '../App.css';
+
 class Game extends Component {
   constructor(props){
     super(props);
@@ -75,6 +77,11 @@ class Game extends Component {
             currentFrame,
             totalScore,
           }
+        }).then((response)=>{
+          //console.log(response);
+        }).catch(function(error){
+          console.log('Error with PATCH command');
+          console.log(error);
         });
       });
     }
@@ -123,6 +130,11 @@ class Game extends Component {
               currentFrame,
               totalScore,
             },
+          }).then((response)=>{
+            //console.log(response);
+          }).catch(function(error){
+            console.log('Error with PATCH command');
+            console.log(error);
           });
         });
       }
@@ -159,7 +171,12 @@ class Game extends Component {
               currentFrame,
               totalScore,
             }
-          })
+          }).then((response)=>{
+            //console.log(response);
+          }).catch(function(error){
+            console.log('Error with PATCH command');
+            console.log(error);
+          });
         })
       }
       else{
@@ -199,7 +216,12 @@ class Game extends Component {
           currentFrame,
           totalScore,
         }
-      })
+      }).then((response)=>{
+        //console.log(response);
+      }).catch(function(error){
+        console.log('Error with PATCH command');
+        console.log(error);
+      });
     })
   }
 
@@ -212,23 +234,30 @@ class Game extends Component {
 
   render(){
     return(
-      <div key={this.state.name+"Scores"}>
+      <div className="Scoreboard" key={this.state.name+"Scores"}>
         <table>
-          <caption>{this.state.name}</caption>
-          <tbody>
+            <tr>
+              <td colspan="22"
+                style={{
+                  textAlign: "center",
+                  backgroundColor: "rgb(254, 126, 0)",
+                  color: "white"}}>
+                  {this.state.name}
+              </td>
+            </tr>
             <tr>
               <th>Frame</th>
-              <td colSpan="2">1</td>
-              <td colSpan="2">2</td>
-              <td colSpan="2">3</td>
-              <td colSpan="2">4</td>
-              <td colSpan="2">5</td>
-              <td colSpan="2">6</td>
-              <td colSpan="2">7</td>
-              <td colSpan="2">8</td>
-              <td colSpan="2">9</td>
-              <td colSpan="2">10</td>
-              <td>Total Score</td>
+              <th colSpan="2">1</th>
+              <th colSpan="2">2</th>
+              <th colSpan="2">3</th>
+              <th colSpan="2">4</th>
+              <th colSpan="2">5</th>
+              <th colSpan="2">6</th>
+              <th colSpan="2">7</th>
+              <th colSpan="2">8</th>
+              <th colSpan="2">9</th>
+              <th colSpan="2">10</th>
+              <th>Total Score</th>
             </tr>
             <tr>
               <th>Scores</th>
@@ -254,24 +283,25 @@ class Game extends Component {
               <td>{this.state.frames[10].getSecondRoll()}</td>
               <td>{this.state.totalScore}</td>
             </tr>
-          </tbody>
         </table>
-        <select value={this.state.newScore} onChange={this._scoreChange.bind(this)}>
-          <option>0</option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
-          <option>6</option>
-          <option>7</option>
-          <option>8</option>
-          <option>9</option>
-        </select>
-        <button onClick={this._addScore}>Add Score</button>
-        <button onClick={this._handleSpare}>Spare</button>
-        <button onClick={this._handleStrike}>Strike</button>
-        <button onClick={this._resetScore}>Reset Score</button>
+        <div className="ScoreboardButtons">
+          <select value={this.state.newScore} onChange={this._scoreChange.bind(this)}>
+            <option>0</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+            <option>7</option>
+            <option>8</option>
+            <option>9</option>
+          </select>
+          <button onClick={this._addScore}>Add Score</button>
+          <button onClick={this._handleSpare}>Spare</button>
+          <button onClick={this._handleStrike}>Strike</button>
+          <button onClick={this._resetScore}>Reset Score</button>
+        </div>
       </div>
     )
   }

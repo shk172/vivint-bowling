@@ -24,15 +24,9 @@ export const playerPost = (req, res, next) => {
 };
 
 export const playerPatch = (req, res, next) =>{
-	console.log("hello");
-	console.log(req.params);
-	console.log(req.body);
 	Player.findOneAndUpdate({name: req.body.name}, req.body, function(err, player){
 		if(!player)
 			return next(new Error('Could not load players'));
-		else{
-			console.log(player);
-		}
 	})
 }
 
