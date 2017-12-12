@@ -23,13 +23,18 @@ export const playerPost = (req, res, next) => {
 	});
 };
 
-
-export const playerPut = (req, res, next) => {
-	Player.findByIdAUpdate(req.params.id, req.body, function(err, post){
-		if(err) console.log("Error with put command in the server");
-		res.json(post);
-	});
-};
+export const playerPatch = (req, res, next) =>{
+	console.log("hello");
+	console.log(req.params);
+	console.log(req.body);
+	Player.findOneAndUpdate({name: req.body.name}, req.body, function(err, player){
+		if(!player)
+			return next(new Error('Could not load players'));
+		else{
+			console.log(player);
+		}
+	})
+}
 
 export const playerDelete = (req, res, next) =>{
   Player.remove().catch(function(err){

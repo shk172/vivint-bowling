@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import Frame from './Frame'
-
+import axios from 'axios';
 class Game extends Component {
   constructor(props){
     super(props);
     this.state={
-      name: this.props.player.name,
+      url: this.props.url,
+      _id: "",
+      name: "",
       frames: {
         1: new Frame(1),
         2: new Frame(2),
@@ -30,7 +32,13 @@ class Game extends Component {
     this._resetScore = this._resetScore.bind(this);
     this._scoreChange = this._scoreChange.bind(this);
   }
-
+  componentDidMount(){
+    this.setState({
+      _id: this.props.player._id,
+      name: this.props.player.name,
+      ...this.props.player.game,
+    })
+  }
   componentDidUpdate(){
     if(this.state.currentFrame === 11){
       this.setState({
@@ -58,6 +66,16 @@ class Game extends Component {
         currentFrame,
         newScore: 0,
         totalScore,
+      }, function(){
+        axios.patch(this.state.url, {
+          _id: this.state.id,
+          name: this.state.name,
+          game:{
+            frames,
+            currentFrame,
+            totalScore,
+          }
+        });
       });
     }
   }
@@ -92,11 +110,22 @@ class Game extends Component {
       if(frames[currentFrame].getCurrentRoll() === 1){
         frames[currentFrame].setStrike();
         var totalScore = this._calculateTotal(frames, currentFrame);
+        currentFrame += 1;
         this.setState({
           frames,
-          currentFrame: currentFrame + 1,
+          currentFrame: currentFrame,
           totalScore
-        })
+        }, function(){
+          axios.patch(this.state.url, {
+            _id: this.state.id,
+            name: this.state.name,
+            game:{
+              frames,
+              currentFrame,
+              totalScore,
+            },
+          });
+        });
       }
       else{
         alert("Cannot roll a strike when it's the second roll. Did you mean a spare?");
@@ -117,10 +146,21 @@ class Game extends Component {
       if(frames[currentFrame].getCurrentRoll() === 2){
         frames[currentFrame].setSpare();
         var totalScore = this._calculateTotal(frames, currentFrame);
+        currentFrame += 1;
         this.setState({
           frames,
-          currentFrame: currentFrame + 1,
+          currentFrame: currentFrame,
           totalScore,
+        }, function(){
+          axios.patch(this.state.url, {
+            _id: this.state.id,
+            name: this.state.name,
+            game:{
+              frames,
+              currentFrame,
+              totalScore,
+            }
+          })
         })
       }
       else{

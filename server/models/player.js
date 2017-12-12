@@ -7,10 +7,10 @@ var playerSchema = new Schema({
     unique: true
   },
 
-  games: [{
+  game: {
     type: Schema.Types.Mixed,
     ref: 'Game'
-  }],
+  },
 })
 
 export default mongoose.model('Player', playerSchema);

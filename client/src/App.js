@@ -15,9 +15,10 @@ class App extends Component {
   }
 
   componentDidMount(){
+    var app = this;
     axios.get(url)
       .then(function(response){
-        console.log(response);
+        app.setState({players: response.data.players});
       })
       .catch(function(error){
         console.log(error);
@@ -32,7 +33,7 @@ class App extends Component {
     var players = this.state.players;
     var player = {
       name: this.state.nameValue,
-      games: []
+      game: {}
     };
     players.push(player);
     this.setState({
@@ -61,7 +62,7 @@ class App extends Component {
   render() {
     var playerScores = this.state.players.map((player)=>{
       return(
-        <Game key={player.name} player={player}/>
+        <Game key={player.name} player={player} url={url}/>
       )
     })
 

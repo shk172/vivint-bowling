@@ -1,5 +1,5 @@
 import express, { Router } from 'express';
-import { playerGet, playerPost, playerPut, playerDelete, playerDeleteWithId } from './controllers/playerController';
+import { playerGet, playerPost, playerPatch, playerDelete, playerDeleteWithId } from './controllers/playerController';
 import Player from './models/player';
 
 const router = Router();
@@ -7,6 +7,8 @@ const router = Router();
 router.get('/players', playerGet);
 
 router.post('/players', playerPost);
+
+router.patch('/players', playerPatch);
 
 router.delete('/players', playerDelete);
 
