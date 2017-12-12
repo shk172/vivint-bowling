@@ -44,7 +44,7 @@ class Game extends Component {
   componentDidUpdate(){
     if(this.state.currentFrame === 11){
       this.setState({
-        currentFrame: this.state.currentFrame + 1,
+        currentFrame: this.state.currentFrame - 1,
         gameOver: true,
       })
     }
@@ -233,8 +233,13 @@ class Game extends Component {
   }
 
   render(){
+    var gameOver = null;
+    if(this.state.gameOver){
+      gameOver = (<div className="GameOver">This game is finished!</div>);
+    }
     return(
       <div className="Scoreboard" key={this.state.name+"Scores"}>
+        {gameOver}
         <table>
             <tr>
               <td colspan="22"
